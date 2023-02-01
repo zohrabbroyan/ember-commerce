@@ -219,6 +219,14 @@ namespace Nop.Web.Infrastructure
                 pattern: $"{lang}/checkout/selectshippingaddress",
                 defaults: new { controller = "Checkout", action = "SelectShippingAddress" });
 
+            endpointRouteBuilder.MapControllerRoute(name: "CheckoutShippingOriginAddress",
+                pattern: $"{lang}/checkout/shippingoriginaddress",
+                defaults: new { controller = "Checkout", action = "ShippingOriginAddress" });
+
+            endpointRouteBuilder.MapControllerRoute(name: "CheckoutSelectShippingOriginAddress",
+                pattern: $"{lang}/checkout/selectshippingoriginaddress",
+                defaults: new { controller = "Checkout", action = "SelectShippingOriginAddress" });
+
             endpointRouteBuilder.MapControllerRoute(name: "CheckoutBillingAddress",
                 pattern: $"{lang}/checkout/billingaddress",
                 defaults: new { controller = "Checkout", action = "BillingAddress" });
@@ -230,6 +238,10 @@ namespace Nop.Web.Infrastructure
             endpointRouteBuilder.MapControllerRoute(name: "CheckoutShippingMethod",
                 pattern: $"{lang}/checkout/shippingmethod",
                 defaults: new { controller = "Checkout", action = "ShippingMethod" });
+
+            endpointRouteBuilder.MapControllerRoute(name: "CheckoutShippingReturnMethod",
+                pattern: $"{lang}/checkout/shippingreturnmethod",
+                defaults: new { controller = "Checkout", action = "ShippingReturnMethod" });
 
             endpointRouteBuilder.MapControllerRoute(name: "CheckoutPaymentMethod",
                 pattern: $"{lang}/checkout/paymentmethod",
