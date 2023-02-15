@@ -39,6 +39,8 @@ namespace Nop.Web.Models.Customer
         VendorInfo = 110,
         GdprTools = 120,
         CheckGiftCardBalance = 130,
-        MultiFactorAuthentication = 140
+        MultiFactorAuthentication = 140,
+        Alerts = 150,
+        Cubes = 160
     }
 }

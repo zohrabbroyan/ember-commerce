@@ -44,6 +44,7 @@ using Nop.Web.Framework;
 using Nop.Web.Framework.Controllers;
 using Nop.Web.Framework.Mvc.Filters;
 using Nop.Web.Framework.Validators;
+using Nop.Web.Models.Catalog;
 using Nop.Web.Models.Customer;
 
 namespace Nop.Web.Controllers
@@ -99,6 +100,8 @@ namespace Nop.Web.Controllers
         private readonly MultiFactorAuthenticationSettings _multiFactorAuthenticationSettings;
         private readonly StoreInformationSettings _storeInformationSettings;
         private readonly TaxSettings _taxSettings;
+        private readonly ICatalogModelFactory _catalogModelFactory;
+        private readonly ICategoryService _categoryService;
 
         #endregion
 
@@ -149,7 +152,9 @@ namespace Nop.Web.Controllers
             MediaSettings mediaSettings,
             MultiFactorAuthenticationSettings multiFactorAuthenticationSettings,
             StoreInformationSettings storeInformationSettings,
-            TaxSettings taxSettings)
+            TaxSettings taxSettings,
+            ICatalogModelFactory catalogModelFactory,
+            ICategoryService categoryService)
         {
             _addressSettings = addressSettings;
             _captchaSettings = captchaSettings;
@@ -197,6 +202,8 @@ namespace Nop.Web.Controllers
             _multiFactorAuthenticationSettings = multiFactorAuthenticationSettings;
             _storeInformationSettings = storeInformationSettings;
             _taxSettings = taxSettings;
+            _catalogModelFactory = catalogModelFactory;
+            _categoryService = categoryService;
         }
 
         #endregion
@@ -1969,6 +1976,30 @@ namespace Nop.Web.Controllers
 
             var model = new MultiFactorAuthenticationProviderModel();
             model = await _customerModelFactory.PrepareMultiFactorAuthenticationProviderModelAsync(model, providerSysName);
+
+            return View(model);
+        }
+
+        #endregion
+
+        #region My account / Customer Cubes
+
+        public virtual async Task<IActionResult> CustomerCubes(CatalogProductsCommand command)
+        {
+            if (!await _customerService.IsRegisteredAsync(await _workContext.GetCurrentCustomerAsync()))
+                return Challenge();
+
+            var category = await _categoryService.GetCategoryByIdAsync(5);
+
+            //if (!await CheckCategoryAvailabilityAsync(category))
+            //    return NotFound();
+
+            var model = await _catalogModelFactory.PrepareCategoryProductsModelAsync(category, command);
+
+
+            //var model = await _catalogModelFactory.PrepareNewProductsModelAsync(command);
+
+            //var model = await _customerModelFactory.PrepareCustomerDownloadableProductsModelAsync();
 
             return View(model);
         }

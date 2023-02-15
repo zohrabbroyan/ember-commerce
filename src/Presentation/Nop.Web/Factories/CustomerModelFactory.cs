@@ -589,6 +589,30 @@ namespace Nop.Web.Factories
 
             model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
             {
+                RouteName = "CustomerAlerts",
+                Title = await _localizationService.GetResourceAsync("Account.CustomerAlerts"),
+                Tab = (int)CustomerNavigationEnum.Alerts,
+                ItemClass = "customer-alerts"
+            });
+
+            model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+            {
+                RouteName = "CustomerOrders",
+                Title = await _localizationService.GetResourceAsync("Account.CustomerOrders"),
+                Tab = (int)CustomerNavigationEnum.Orders,
+                ItemClass = "customer-orders"
+            });
+
+            model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+            {
+                RouteName = "CustomerCubes",
+                Title = await _localizationService.GetResourceAsync("Account.CustomerCubes"),
+                Tab = (int)CustomerNavigationEnum.Cubes,
+                ItemClass = "customer-orders"
+            });
+
+            model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
+            {
                 RouteName = "CustomerInfo",
                 Title = await _localizationService.GetResourceAsync("Account.CustomerInfo"),
                 Tab = (int)CustomerNavigationEnum.Info,
@@ -605,10 +629,10 @@ namespace Nop.Web.Factories
 
             model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
             {
-                RouteName = "CustomerOrders",
-                Title = await _localizationService.GetResourceAsync("Account.CustomerOrders"),
-                Tab = (int)CustomerNavigationEnum.Orders,
-                ItemClass = "customer-orders"
+                RouteName = "CustomerChangePassword",
+                Title = await _localizationService.GetResourceAsync("Account.ChangePassword"),
+                Tab = (int)CustomerNavigationEnum.ChangePassword,
+                ItemClass = "change-password"
             });
 
             var store = await _storeContext.GetCurrentStoreAsync();
@@ -659,14 +683,6 @@ namespace Nop.Web.Factories
                     ItemClass = "reward-points"
                 });
             }
-
-            model.CustomerNavigationItems.Add(new CustomerNavigationItemModel
-            {
-                RouteName = "CustomerChangePassword",
-                Title = await _localizationService.GetResourceAsync("Account.ChangePassword"),
-                Tab = (int)CustomerNavigationEnum.ChangePassword,
-                ItemClass = "change-password"
-            });
 
             if (_customerSettings.AllowCustomersToUploadAvatars)
             {

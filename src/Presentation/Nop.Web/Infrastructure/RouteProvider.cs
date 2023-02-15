@@ -80,6 +80,10 @@ namespace Nop.Web.Infrastructure
                 pattern: $"{lang}/order/history",
                 defaults: new { controller = "Order", action = "CustomerOrders" });
 
+            endpointRouteBuilder.MapControllerRoute(name: "CustomerCubes",
+                pattern: $"{lang}/customer/cubes",
+                defaults: new { controller = "Customer", action = "CustomerCubes" });
+
             //contact us
             endpointRouteBuilder.MapControllerRoute(name: "ContactUs",
                 pattern: $"{lang}/contactus",
